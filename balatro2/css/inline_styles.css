@@ -1,0 +1,115 @@
+body[data-ads-enabled=false] [data-ad],body[data-ads-enabled=false] #aniBox{display:none!important}
+
+
+[data-reviq-sticky-ad] *{box-sizing:border-box}[data-reviq-sticky-ad]>[data-ad]{margin-top:3px}[data-reviq-sticky-ad]{position:fixed;left:0;right:0;bottom:var(--reviq-sticky-bottom, 0);max-height:var(--sticky-height, 90px);width:fit-content;margin:0 auto;z-index:10000002;background:#282b30;padding-inline:3px calc(3rem + 3px);padding-block-start:3px 0;border-radius:7px 7px 0 0;display:flex;flex-direction:row;justify-content:flex-end}[data-reviq-sticky-ad] [id^=google_ads_iframe]{max-width:calc(100vw - 3rem - 20px)}[data-reviq-sticky-ad]:not(:has(iframe)){padding:0}[data-reviq-sticky-ad]:not(:has(iframe))>div{height:0px}[data-reviq-sticky-ad] button{all:unset;box-sizing:border-box;background:#282b30;padding:.5rem 1rem;cursor:pointer;color:#fafafa;border:1px solid #fafafa;border-radius:5px 5px 0 0}[data-reviq-sticky-ad] button{position:absolute;width:3rem;height:100%;right:3px;text-align:center;background:#282b30;cursor:pointer;color:#dadada;border:1px solid #5a5a5a;border-radius:0 5px 5px 0}[data-reviq-sticky-ad] button:hover{background:#424549;outline:1px solid #8a8a8a;color:#fafafa}[data-reviq-sticky-ad] button svg{all:unset;width:1rem;height:1rem;fill:#fafafa}
+
+
+[data-ad]{background:transparent}[data-ad] div:is([id^=google_ads_iframe],.rtbdemand_adunit){min-height:32px;min-width:100px;vertical-align:top}[data-ad] iframe{color-scheme:light;background:transparent!important;border-radius:5px;max-width:var(--ad-width)!important;max-height:var(--ad-height)!important}[data-ad]:not([data-ad-can-shrink]){position:relative;min-width:var(--ad-width);min-height:var(--ad-height);max-width:var(--ad-width);max-height:var(--ad-height);width:var(--ad-width);height:var(--ad-height)}[data-ad]:not([data-ad-can-shrink]) div:is([id^=google_ads_iframe],.rtbdemand_adunit){min-width:var(--ad-width);min-height:var(--ad-height);max-width:var(--ad-width);max-height:var(--ad-height);width:var(--ad-width);height:var(--ad-height)}[data-ad]:not([data-ad-can-shrink]) iframe{min-width:1px;min-height:1px;width:var(--ad-width);height:var(--ad-height);max-width:var(--ad-width);max-height:var(--ad-height)}div:has(>div[id^=google_ads_iframe]):not(:has(iframe)) div[id^=google_ads_iframe]{background:transparent!important}body>iframe[width="0"][height="0"]{display:none}
+
+
+
+            .toast {
+                display: flex !important; /* Change to flex and add !important */
+                all: initial;
+                flex-direction: row !important;
+                align-items: center !important; /* Center vertically and add !important */
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff;
+                padding: 20px 30px;
+                margin-bottom: 15px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(10px);
+                opacity: 0;
+
+                max-width: 500px; /* Set a max-width */
+                transition: opacity 0.5s ease-in-out;
+                font-size: 18px;
+                position: relative; /* For gradient overlay */
+
+                font-family: 'Open Sans', sans-serif; /* Apply Open Sans font */
+            }
+            .toast.show {
+                opacity: 1;
+            }
+            .toast.info::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, #020024, #090979, #00d4ff);
+                opacity: 0.6; /* Adjust opacity for glassmorphic effect */
+                border-radius: 10px;
+                z-index: -1; /* Place behind the content */
+            }
+            .toast.error {
+                background: rgba(244, 67, 54, 0.8) !important; /* Red glassmorphic background with transparency */
+                backdrop-filter: blur(10px) !important; /* Add blur effect for glassmorphic effect */
+            }
+            .toast.success {
+                background: rgba(76, 175, 80, 0.8) !important;
+            }
+            .toast.warning {
+                background: rgba(255, 152, 0, 0.8) !important;
+            }
+            .toast.info {
+                background: rgba(255, 255, 255, 0.1) !important;
+            }
+            .toast.default {
+                background: rgba(51, 51, 51, 0.8) !important;
+            }
+            .lds-ripple,
+            .lds-ripple div {
+                box-sizing: border-box;
+            }
+            .lds-ripple {
+                display: inline-block;
+                position: relative;
+                width: 40px;
+                height: 40px;
+                margin-left: 10px; /* Adjust margin to the left */
+                margin-right: -10px; /* Remove right margin */
+            }
+            .lds-ripple div {
+                position: absolute;
+                border: 4px solid #fff;
+                opacity: 1;
+                border-radius: 50%;
+                animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+            }
+            .lds-ripple div:nth-child(2) {
+                animation-delay: -0.5s;
+            }
+            @keyframes lds-ripple {
+                0% {
+                    top: 18px;
+                    left: 18px;
+                    width: 4px;
+                    height: 4px;
+                    opacity: 0;
+                }
+                4.9% {
+                    top: 18px;
+                    left: 18px;
+                    width: 4px;
+                    height: 4px;
+                    opacity: 0;
+                }
+                5% {
+                    top: 18px;
+                    left: 18px;
+                    width: 4px;
+                    height: 4px;
+                    opacity: 1;
+                }
+                100% {
+                    top: 0;
+                    left: 0;
+                    width: 40px;
+                    height: 40px;
+                    opacity: 0;
+                }
+            }
+        
