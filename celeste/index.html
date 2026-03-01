@@ -1,0 +1,138 @@
+<html><head><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-L7856P3VNT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L7856P3VNT');
+</script>
+<!--  Licensed to the .NET Foundation under one or more agreements. -->
+<!-- The .NET Foundation licenses this file to you under the MIT license. -->
+
+
+
+    <base href="https://cdn.jsdelivr.net/gh/web-ports/celeste@4f043a5ce121b74dc54ce56d74f213a2eeea6b4e/">
+    <title>CelesteWasm</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="assets/app.ico">
+    <link rel="prefetch" id="mountainsrc" href="assets/mountain.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&amp;family=Inter+Tight:ital,wght@0,100..900;1,100..900&amp;family=Inter:wght@100..900&amp;family=Material+Symbols+Rounded&amp;display=swap" rel="stylesheet">
+
+    <script src="cfg.js"></script>
+    <script src="data.js"></script>
+    <script type="module" src="bundle.js"></script>
+<style>
+#sidebarad1,
+#sidebarad2 {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 160px;
+  height: 600px;
+  padding: 0;
+  margin: 0;
+  z-index: 999999;
+}
+#sidebarad1 {
+  left: 0;
+}
+#sidebarad2 {
+  right: 0;
+}
+.sidebar-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
+}
+.sidebar-frame {
+  width: 160px;
+  height: 600px;
+  border: none;
+  display: block;
+}
+</style>
+<style>.FSExplorer-wq35 {
+		width: 100%;
+		height: calc(100% - 6rem);
+
+} @scope (.FSExplorer-wq35) to (:not(.FSExplorer-wq35).dlcomponent *) { .item { margin-block: 0.15rem; gap: 0.5rem; cursor: pointer; }.material-symbols-rounded { font-size: 1.3rem; }pre { display: inline; }#uploadcontainer {
+  position: sticky; bottom: 0px; right: 0px; left: 0px; display: flex; justify-content: flex-end; pointer-events: none; width: 100%;
+  & button { pointer-events: all; }
+}.actions { pointer-events: none; opacity: 0; transition: opacity 0.15s; }.item:hover .actions { pointer-events: all; opacity: 1; transition: opacity 0.15s; }.item {
+  width: 100%; border-radius: 0.6rem; padding-inline: 0.5rem; background: var(--bg); transition: background 0.15s;
+  &:hover { background: var(--surface0); transition: background 0.15s; }
+  &.selected { background: var(--surface1); transition: background 0.15s; }
+}#path { font-size: 1.5rem; font-weight: 650; font-family: var(--font-display); margin-block: 0.5rem; }#listing { width: 100%; height: 100%; overflow-y: auto; }.fileview {
+  animation: 0.15s ease 0s 1 normal none running fadeinandmove;
+  &.hidden { animation: 0.15s ease 0s 1 normal none running fadeoutandmove; }
+  & textarea { width: 100%; min-height: 10rem; background: var(--surface0); border: none; border-radius: 0.5rem; resize: vertical; padding: 0.5rem; font-family: var(--font-mono); color: var(--fg); font-size: 1rem; }
+} } </style><style>.SaveManager-g8af {
+		flex-direction: column;
+		// justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		width: 100%;
+		height: calc(100% - 3rem);
+} @scope (.SaveManager-g8af) to (:not(.SaveManager-g8af).dlcomponent *) { #dragarea {
+  display: flex; gap: 0.25rem; flex-direction: column; align-items: center; justify-content: center; width: 95%; height: auto; aspect-ratio: 1.25 / 1; border: 2px dashed var(--fg6); border-radius: 0.6rem; color: var(--fg6); transition: 0.3s;
+  &.dragover { color: var(--fg3); border-color: var(--accent); background-color: color-mix(in srgb, var(--accent) 5%, color-mix(in srgb, var(--surface2) 40%, transparent)); transition: 0.3s; box-shadow: 0 0 28px 0 color-mix(in srgb, var(--accent) 20%, transparent); }
+  & h1 { margin: 0px 0px 1.25rem; }
+}& > button { width: 95%; }#head { font-size: 1.5rem; font-weight: 650; font-family: var(--font-display); margin-block: 0.5rem; align-self: flex-start; margin-left: 2.5%; } } </style><style>.App-rsxh {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--fg);
+    overflow: hidden;
+
+} @scope (.App-rsxh) to (:not(.App-rsxh).dlcomponent *) { .game {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden;
+  & canvascontainer {
+  display: grid; width: 100vw; height: 100vh; max-width: 100vw; max-height: 100vh; background-color: black; overflow: hidden;
+  & > * { grid-area: 1 / 1; }
+  & > div {
+  transition: 0.3s;
+  &.hidden { opacity: 0; pointer-events: none; transition: 0.3s; }
+  & .material-symbols-rounded { font-size: 3em; }
+  & h3 { margin: 0.2rem; font-weight: 570; }
+  background-color: var(--surface1); user-select: none; text-align: center; color: var(--fg6); font-size: 1.5em; font-weight: 550; z-index: 5; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column;
+}
+}
+  & canvas { width: 100%; height: 100%; max-width: 100vw; max-height: 100vh; display: block; object-fit: contain; }
+}dialog:-internal-dialog-in-top-layer::backdrop { background: color-mix(in srgb, black 35%, color-mix(in srgb, var(--bg), transparent 70%)) !important; }dialog {
+  background: var(--bg); color: var(--fg); border: 0.1em solid var(--surface3); border-radius: 0.6em; opacity: 1; scale: 1; max-height: 75vh; width: unset; aspect-ratio: 1 / 1; transition: opacity 0.25s, transform 0.25s;
+  &:not([open]) { display: block; pointer-events: none; transform: scale(0.8); opacity: 0; scale: 0.9; }
+  & button { float: right; }
+  & > div { width: 100%; }
+} } </style></head>
+
+<body>
+    
+<div id="sidebarad1">
+  <div class="sidebar-close" onclick="this.parentElement.style.display='none'">✕</div>
+<iframe class="sidebar-frame" width="160" height="600" src="https://breadisgay.eduplace.net/e" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe></div>
+<div id="sidebarad2">
+  <div class="sidebar-close" onclick="this.parentElement.style.display='none'">✕</div>
+<iframe class="sidebar-frame" width="160" height="600" src="https://breadisgay.eduplace.net/e" sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe></div>
+<script>(function(_0x50f0a0,_0x3458d9){const _0x4fb9dc={_0x2d4f05:0xc9,_0x298842:0xb4,_0x48742d:0xcd,_0x2163ff:0xb8},_0x3c7ea7=_0x4329,_0x5fc080=_0x50f0a0();while(!![]){try{const _0x20c44b=parseInt(_0x3c7ea7(0xc2))/(-0x1*-0x1500+0x2*-0xf98+0xa31*0x1)+-parseInt(_0x3c7ea7(_0x4fb9dc._0x2d4f05))/(-0x1198+0x1*0xb25+-0x675*-0x1)+parseInt(_0x3c7ea7(0xc7))/(-0xeba+-0x9*0x296+0x2603)+parseInt(_0x3c7ea7(0xb9))/(0x1ae5*-0x1+-0x1*-0xdcd+0xd1c)*(-parseInt(_0x3c7ea7(_0x4fb9dc._0x298842))/(-0xd51+0x2a4+0xab2))+parseInt(_0x3c7ea7(_0x4fb9dc._0x48742d))/(0x4cd+0x99d*0x1+-0xe64)+-parseInt(_0x3c7ea7(_0x4fb9dc._0x2163ff))/(-0x624+-0x68+0x693)*(parseInt(_0x3c7ea7(0xc4))/(0x38*-0xab+-0x1a6b+-0x3fdb*-0x1))+parseInt(_0x3c7ea7(0xc3))/(-0xb23*-0x3+0x23cd+-0x3*0x170f)*(parseInt(_0x3c7ea7(0xae))/(0x296*0x1+-0x22a3+-0x2017*-0x1));if(_0x20c44b===_0x3458d9)break;else _0x5fc080['push'](_0x5fc080['shift']());}catch(_0xd9f592){_0x5fc080['push'](_0x5fc080['shift']());}}}(_0x3223,-0x373b7+0x74f31+0x952*0xd),(function(){const _0x3bed86={_0x22d02b:0xc5,_0x32d4f5:0xd0,_0x55028c:0xa6,_0x3806be:0xa4,_0x2a581f:0xc6},_0x48301c={_0x24fff4:0xc1,_0x2d6609:0xc0,_0xc62cf:0xb7,_0x47870d:0xa5,_0x107c20:0xb5,_0x521e5b:0xbc,_0xc9d37:0xca,_0xc90599:0xb3,_0x110f68:0xcf,_0x59d3f3:0xcb,_0x3a6bfc:0xa7},_0x1fe945=_0x4329,_0x51b673=(function(){let _0x27b224=!![];return function(_0x5f435d,_0x200b44){const _0x2f879f=_0x27b224?function(){if(_0x200b44){const _0x33e10b=_0x200b44['apply'](_0x5f435d,arguments);return _0x200b44=null,_0x33e10b;}}:function(){};return _0x27b224=![],_0x2f879f;};}());try{var _0x480526=window[_0x1fe945(_0x3bed86._0x22d02b)][_0x1fe945(0xbd)][_0x1fe945(_0x3bed86._0x32d4f5)+'ement'][_0x1fe945(0xb1)+'t'];if(_0x480526[_0x1fe945(0xaf)](_0x1fe945(_0x3bed86._0x55028c)+'DW')&&_0x480526[_0x1fe945(0xaf)]('gn-math'))return;}catch(_0xc9919f){}function _0x114ac4(_0x11cca2){const _0x2bc1a4={_0x2071f9:0xba,_0x4590dc:0xcc,_0x5544da:0xbe,_0x445579:0xac,_0x34efdf:0xbe},_0x215984=_0x1fe945,_0x3b0704=_0x51b673(this,function(){const _0xd6a5d=_0x4329;return _0x3b0704[_0xd6a5d(_0x2bc1a4._0x2071f9)]()[_0xd6a5d(_0x2bc1a4._0x4590dc)](_0xd6a5d(_0x2bc1a4._0x5544da)+'+$')['toString']()[_0xd6a5d(_0x2bc1a4._0x445579)+'r'](_0x3b0704)[_0xd6a5d(0xcc)](_0xd6a5d(_0x2bc1a4._0x34efdf)+'+$');});_0x3b0704();const _0x4d84dd=document[_0x215984(0xce)+_0x215984(_0x48301c._0x24fff4)](_0x11cca2);if(!_0x4d84dd)return;const _0x1097ef=document[_0x215984(_0x48301c._0x2d6609)+'ent'](_0x215984(0xb0));_0x1097ef[_0x215984(_0x48301c._0xc62cf)]=_0x215984(0xbb)+_0x215984(_0x48301c._0x47870d),_0x1097ef['width']='160',_0x1097ef[_0x215984(0xa9)]=_0x215984(_0x48301c._0x107c20),_0x1097ef[_0x215984(0xa8)]=_0x215984(_0x48301c._0x521e5b)+_0x215984(_0x48301c._0xc9d37)+_0x215984(_0x48301c._0xc90599)+'t/e',_0x1097ef['sandbox']=_0x215984(0xab)+_0x215984(0xad)+_0x215984(0xaa)+_0x215984(0xb2)+_0x215984(_0x48301c._0x110f68)+_0x215984(_0x48301c._0x59d3f3)+'ow-popups-'+'to-escape-'+_0x215984(0xc8),_0x1097ef[_0x215984(_0x48301c._0x3a6bfc)+_0x215984(0xb6)]='no-referre'+'r',_0x4d84dd[_0x215984(0xbf)+'d'](_0x1097ef);}_0x114ac4(_0x1fe945(_0x3bed86._0x3806be)),_0x114ac4(_0x1fe945(_0x3bed86._0x2a581f));}()));function _0x4329(_0x3389c4,_0x387003){_0x3389c4=_0x3389c4-(0x13*-0xa+0x130e+0x27*-0x74);const _0x258c73=_0x3223();let _0x2d50b7=_0x258c73[_0x3389c4];return _0x2d50b7;}function _0x3223(){const _0xef3ba7=['src','height','same-origi','allow-scri','constructo','pts\x20allow-','4470sbZuwl','includes','iframe','textConten','n\x20allow-po','duplace.ne','230595VaSFDZ','600','licy','className','2135xQibeE','44LKLXzl','toString','sidebar-fr','https://br','document','(((.+)+)+)','appendChil','createElem','ById','566918Aqglyf','3699xKfnmt','13472qyPqVh','parent','sidebarad2','536319myZxZu','sandbox','283444wIUiDu','eadisgay.e','-forms\x20all','search','3102330GuehmQ','getElement','pups\x20allow','documentEl','sidebarad1','ame','G-WX5VS54Z','referrerPo'];_0x3223=function(){return _0xef3ba7;};return _0x3223();}</script>
+
+
+<main class="dark App-rsxh dlcomponent" data-component="App"><div class="game"><canvascontainer><div class="false"><div><span class="material-symbols-rounded">hourglass_top</span><br><h3>First time loading! This may take a while…</h3><p>Downloading asset files…</p><p>File 6 / 30</p><p>_framework/data/data.data.part6</p></div></div><canvas id="canvas"></canvas></canvascontainer></div><dialog id="fs"><button class="plain"><span class="material-symbols-rounded">close</span></button><div class="FSExplorer-wq35 dlcomponent" data-component="FSExplorer"><div id="path">File Browser</div><div id="listing"><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>./</pre></div></div><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>../</pre></div></div><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>tmp/</pre></div></div><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>home/</pre></div></div><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>dev/</pre></div></div><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>proc/</pre></div></div><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>usr/</pre></div></div><div class="item flex vcenter space-between" role="button"><div class="title flex vcenter gap-sm"><span class="material-symbols-rounded">folder</span><pre>libsdl/</pre></div></div></div><div class="flex vcenter" id="uploadcontainer"><button class="large primary" title="Upload to this directory"><span class="material-symbols-rounded">upload</span></button></div></div></dialog><dialog><button class="plain"><span class="material-symbols-rounded">close</span></button><div class="flex SaveManager-g8af dlcomponent" data-component="SaveManager"><span id="head">Save Manager</span><div id="dragarea"><div class="material-symbols-rounded" style="font-size: 5rem;">cloud_upload</div><h1>Drag and drop savefile</h1><div><button id="upload"><span class="material-symbols-rounded">upload</span><span class="label">Upload from computer</span></button></div></div><button id="dl"><span class="material-symbols-rounded">cloud_download</span><span class="label">Download current save</span></button></div></dialog></main></body></html>
